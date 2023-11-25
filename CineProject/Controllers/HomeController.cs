@@ -21,5 +21,11 @@ namespace CineProject.Controllers
         {
             return View();
         }
+
+        public IActionResult MovieDetail(int movieId)
+        {
+            var movie = _movieService.GetById(movieId);
+            return View(movie);
+        }
     }
 }
