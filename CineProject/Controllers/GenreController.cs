@@ -24,7 +24,18 @@ namespace CineProject.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
+
+            // Verificar si el nombre del género ya existe en el servicio
+            if (_genreService.IsGenreNameExists(model.GenreName))
+            {
+                // Si el nombre del género ya existe, agregar un mensaje de error a TempData
+                TempData["msg"] = "¡Error! El nombre del género ya existe.";
+                return RedirectToAction(nameof(Add)); // Redirigir de nuevo a la vista de agregar
+            }
+
+            // Si no existe, llamar al servicio para agregar el nuevo género
             var result = _genreService.Add(model);
+
             if (result)
             {
                 TempData["msg"] = "Added Successfully";

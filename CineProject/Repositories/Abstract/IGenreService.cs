@@ -9,6 +9,7 @@ namespace CineProject.Repositories.Abstract
         bool Update(Genre model);
         Genre GetById(int id);
         bool Delete(int id);
+        bool IsGenreNameExists(string genreName);
         IQueryable<Genre> List();
 
     }

@@ -25,8 +25,8 @@ namespace CineProject.Controllers
                 Email = "admin@gmail.com",
                 Username = "admin",
                 Name = "admin",
-                Password = "admin123",
-                PasswordConfirm = "admin123",
+                Password = "Admin123@",
+                PasswordConfirm = "Admin123@",
                 Role = "Admin"
             };
             // if you want to register with user , Change Role="User"
