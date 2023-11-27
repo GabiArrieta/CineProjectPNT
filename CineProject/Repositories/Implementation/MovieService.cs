@@ -78,7 +78,7 @@ namespace CineProject.Repositories.Implementation
 
             if (paging)
             {
-                // here we will apply paging
+                // Aca se aplica la paginacion
                 int pageSize = 5;
                 int count = list.Count;
                 int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -107,8 +107,8 @@ namespace CineProject.Repositories.Implementation
         {
             try
             {
-                // these genreIds are not selected by users and still present is movieGenre table corresponding to
-                // this movieId. So these ids should be removed.
+                // Ids a eliminar
+                
                 var genresToDeleted = ctx.MovieGenre.Where(a => a.MovieId == model.Id && !model.Genres.Contains(a.GenreId)).ToList();
                 foreach (var mGenre in genresToDeleted)
                 {
@@ -125,7 +125,7 @@ namespace CineProject.Repositories.Implementation
                 }
 
                 ctx.Movie.Update(model);
-                // we have to add these genre ids in movieGenre table
+                // agregar el genero a la lista
                 ctx.SaveChanges();
                 return true;
             }
@@ -141,5 +141,37 @@ namespace CineProject.Repositories.Implementation
             return genreIds;
         }
 
+        public MovieListVm GetMoviesByTitle(string term, bool paging = false, int currentPage = 0)
+        {
+            var data = new MovieListVm();
+
+            var query = ctx.Movie.AsQueryable();
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                term = term.ToLower();
+                query = query.Where(a => a.Title.ToLower().Contains(term));
+            }
+
+            var list = query.ToList();
+
+            if (paging)
+            {
+                // Aplicar paginación si es necesario
+                int pageSize = 5;
+                int count = list.Count;
+                int totalPages = (int)Math.Ceiling(count / (double)pageSize);
+                list = list.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+                data.PageSize = pageSize;
+                data.CurrentPage = currentPage;
+                data.TotalPages = totalPages;
+            }
+
+            // Resto del código para obtener nombres de géneros, similar a tu método List()
+
+            data.MovieList = list.AsQueryable();
+            return data;
+        }
     }
 }

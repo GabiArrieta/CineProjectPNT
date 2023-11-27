@@ -10,6 +10,7 @@ namespace CineProject.Repositories.Abstract
         Movie GetById(int id);
         bool Delete(int id);
         MovieListVm List(string term = "", bool paging = false, int currentPage = 0);
+        MovieListVm GetMoviesByTitle(string term, bool paging = false, int currentPage = 0);
         List<int> GetGenreByMovieId(int movieId);
 
     }

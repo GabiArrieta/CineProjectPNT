@@ -11,7 +11,8 @@ namespace CineProject.Models.Domain
         public string? Title { get; set; }
         public string? ReleaseYear { get; set; }
 
-        public string? MovieImage { get; set; }  // stores movie image name with extension (eg, image0001.jpg)
+        // guardar imagenes de pelis con extension especifica (eg, image0001.jpg)
+        public string? MovieImage { get; set; }  
         [Required]
         public string? Cast { get; set; }
         [Required]

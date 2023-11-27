@@ -46,6 +46,12 @@ namespace CineProject.Repositories.Implementation
             return ctx.Genre.Find(id);
         }
 
+        public bool IsGenreNameExists(string genreName)
+        {
+            // Verificar si ya existe un género con el mismo nombre en la base de datos
+            return ctx.Genre.Any(g => g.GenreName == genreName);
+        }
+
         public IQueryable<Genre> List()
         {
             var data = ctx.Genre.AsQueryable();
@@ -65,5 +71,6 @@ namespace CineProject.Repositories.Implementation
                 return false;
             }
         }
+
     }
 }

@@ -11,11 +11,8 @@ namespace CineProject.Controllers
         {
             this.authService = authService;
         }
-        /* We will create a user with admin rights, after that we are going
-          to comment this method because we need only
-          one user in this application 
-          If you need other users ,you can implement this registration method with view
-          I have create a complete tutorial for this, you can check the link in description box
+        /* 
+         * Usuario creado unica vez con el rol de Admin
          */
 
         public async Task<IActionResult> Register()
@@ -29,7 +26,7 @@ namespace CineProject.Controllers
                 PasswordConfirm = "admin123",
                 Role = "Admin"
             };
-            // if you want to register with user , Change Role="User"
+            // se puede registrar un user con Role="User"
             var result = await authService.RegisterAsync(model);
             return Ok(result.Message);
         }

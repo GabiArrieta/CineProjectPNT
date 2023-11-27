@@ -21,16 +21,16 @@ namespace CineProject.Repositories.Implementation
                     Directory.CreateDirectory(path);
                 }
 
-                // Check the allowed extenstions
+                // Extensiones que son aceptadas
                 var ext = Path.GetExtension(imageFile.FileName);
-                var allowedExtensions = new string[] { ".jpg", ".png", ".jpeg" };
+                var allowedExtensions = new string[] { ".jpg", ".png", ".jpeg", ".jfif", ".gif" };
                 if (!allowedExtensions.Contains(ext))
                 {
                     string msg = string.Format("Only {0} extensions are allowed", string.Join(",", allowedExtensions));
                     return new Tuple<int, string>(0, msg);
                 }
                 string uniqueString = Guid.NewGuid().ToString();
-                // we are trying to create a unique filename here
+                // crear archivo con nombre unico
                 var newFileName = uniqueString + ext;
                 var fileWithPath = Path.Combine(path, newFileName);
                 var stream = new FileStream(fileWithPath, FileMode.Create);

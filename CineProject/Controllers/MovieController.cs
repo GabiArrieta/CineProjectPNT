@@ -96,11 +96,11 @@ namespace CineProject.Controllers
             }
         }
 
-        public IActionResult MovieList()
-        {
-            var data = this._movieService.List();
-            return View(data);
-        }
+       // public IActionResult MovieList()
+        //{
+          //  var data = this._movieService.List();
+            //return View(data);
+        //}
 
         public IActionResult Delete(int id)
         {
@@ -108,7 +108,14 @@ namespace CineProject.Controllers
             return RedirectToAction(nameof(MovieList));
         }
 
+        public IActionResult MovieList(string term = "", bool paging = false, int currentPage = 0)
+        {
+            var data = term != ""
+                ? _movieService.GetMoviesByTitle(term, paging, currentPage) // Llama al método de búsqueda por título
+                : _movieService.List(term, paging, currentPage); // Si no hay término, muestra todas las películas
 
+            return View(data);
+        }
 
     }
 }
