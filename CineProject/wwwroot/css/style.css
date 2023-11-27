@@ -229,6 +229,32 @@ footer {
   padding: 0 1.2rem;
 }
 
+.custom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajustar al tamaño deseado */
+}
+
+.custom-content {
+    display: flex;
+}
+
+.custom-column {
+    margin: 0 20px;
+}
+
+.custom-heading {
+    text-align: center;
+}
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
 
 /* Media queries */
 
